@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>الجوهرة في الطب | ملخصات طلبة الطب - جامعة الجزائر 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: { 'cairo': ['Cairo', 'sans-serif'] },
+      boxShadow: {
+        'soft': '0 10px 30px -10px rgba(0,0,0,0.1)',
+        'glow': '0 0 40px rgba(16,185,129,0.3)'
+      }
+    }
+  }
+}
+</script>
+<style>
+* { font-family: 'Cairo', sans-serif; }
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+.glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #10b981; border-radius: 999px; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@keyframes fadeInUp { from { opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+.animate-fadeInUp { animation: fadeInUp .6s ease forwards; }
+</style>
+</head>
+<body class="bg-[#f8fafc] dark:bg-[#020617] text-slate-800 dark:text-slate-100 font-cairo transition-colors duration-300">
+
+<!-- Background Gradient Blobs -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+  <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-300/30 dark:bg-emerald-600/20 rounded-full blur-3xl"></div>
+  <div class="absolute top-1/2 -left-40 w-96 h-96 bg-cyan-300/30 dark:bg-cyan-600/20 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-1/3 w-80 h-80 bg-teal-300/20 dark:bg-teal-600/20 rounded-full blur-3xl"></div>
+</div>
+
+<!-- Navbar -->
+<header class="sticky top-0 z-40 glass bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/60 dark:border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center shadow-glow">
+          <i class="ri-heart-pulse-line text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-xl leading-none">الجوهرة في الطب</h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400 -mt-0.5">جامعة الجزائر 1</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#summaries" class="hover:text-emerald-600 transition">الملخصات</a>
+        <a href="#years" class="hover:text-emerald-600 transition">السنوات</a>
+        <a href="#about" class="hover:text-emerald-600 transition">عن المنصة</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="darkToggle" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center">
+          <i class="ri-moon-line dark:hidden text-lg"></i>
+          <i class="ri-sun-line hidden dark:block text-lg"></i>
+        </button>
+        <div id="authButtons" class="flex items-center gap-2">
+          <button id="loginBtn" class="hidden sm:inline-flex px-4 py-2 rounded-xl font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">تسجيل الدخول</button>
+          <button id="registerBtn" class="px-4 py-2 rounded-xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow-soft hover:shadow-glow transition">إنشاء حساب</button>
+        </div>
+        <div id="userMenu" class="hidden items-center gap-3">
+          <button id="uploadBtn" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold bg-emerald-600 text-white hover:bg-emerald-700 shadow-soft transition">
+            <i class="ri-upload-2-line"></i>
+            <span>تبرع بملخص</span>
+          </button>
+          <div class="relative">
+            <button id="avatarBtn" class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 text-white font-bold flex items-center justify-center"></button>
+            <div id="dropdown" class="hidden absolute left-0 mt-2 w-56 rounded-2xl bg-white dark:bg-slate-900 shadow-soft border border-slate-200 dark:border-slate-800 p-2 z-50">
+              <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 mb-2">
+                <p id="userName" class="font-bold text-sm"></p>
+                <p id="userEmail" class="text-xs text-slate-500"></p>
+              </div>
+              <button id="myUploadsBtn" class="w-full text-right px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-sm flex items-center gap-2"><i class="ri-folder-3-line"></i> ملخصاتي</button>
+              <button id="logoutBtn" class="w-full text-right px-3 py-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-950 text-red-600 text-sm flex items-center gap-2"><i class="ri-logout-box-r-line"></i> تسجيل الخروج</button>
+            </div>
+          </div>
+        </div>
+        <button id="mobileMenuBtn" class="md:hidden w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center"><i class="ri-menu-3-line text-xl"></i></button>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 glass">
+    <div class="px-4 py-3 flex flex-col gap-2 text-sm font-bold">
+      <a href="#summaries" class="py-2">الملخصات</a>
+      <a href="#years" class="py-2">السنوات</a>
+      <a href="#about" class="py-2">عن المنصة</a>
+      <button id="mobileUploadBtn" class="mt-2 px-4 py-2 rounded-xl bg-emerald-600 text-white hidden">تبرع بملخص</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative pt-16 pb-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="animate-fadeInUp">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-xs font-bold mb-4">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          منصة طلابية تطوعية 100%
+        </div>
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+          ملخصات طبية <span class="bg-gradient-to-l from-emerald-600 to-cyan-600 bg-clip-text text-transparent">موثوقة</span> من زملائك
+        </h2>
+        <p class="mt-5 text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
+          الجوهرة في الطب هي مجتمع طلبة الطب بجامعة الجزائر 1 من السنة الأولى إلى السابعة. سجل دخولك، تبرع بملخصاتك، وساعد زملاءك ينجحوا معاك.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <button id="heroUpload" class="px-6 py-3 rounded-2xl font-extrabold bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow-glow hover:scale-[1.02] transition flex items-center gap-2">
+            <i class="ri-upload-cloud-2-line text-xl"></i>
+            ارفع ملخصك الآن
+          </button>
+          <a href="#summaries" class="px-6 py-3 rounded-2xl font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 transition flex items-center gap-2">
+            <i class="ri-search-line"></i>
+            تصفح الملخصات
+          </a>
+        </div>
+        <!-- Stats -->
+        <div class="mt-10 grid grid-cols-3 gap-4 max-w-md">
+          <div class="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center">
+            <p id="statSummaries" class="text-2xl font-black text-emerald-600">0</p>
+            <p class="text-xs text-slate-500">ملخص</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center">
+            <p id="statUsers" class="text-2xl font-black text-cyan-600">0</p>
+            <p class="text-xs text-slate-500">طالب متبرع</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center">
+            <p id="statDownloads" class="text-2xl font-black text-teal-600">0</p>
+            <p class="text-xs text-slate-500">تحميل</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative rounded-[2rem] bg-gradient-to-br from-emerald-600 to-cyan-600 p-[2px] shadow-soft">
+          <div class="rounded-[1.9rem] bg-white dark:bg-slate-950 p-6 sm:p-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-extrabold text-lg">أحدث التبرعات</h3>
+              <span class="text-xs px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 font-bold">مباشر</span>
+            </div>
+            <div id="latestList" class="space-y-3 max-h-[380px] overflow-y-auto scrollbar-thin pr-2">
+              <!-- injected -->
+            </div>
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -left-6 w-24 h-24 rounded-3xl bg-cyan-500/20 blur-2xl"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Years Filter -->
+<section id="years" class="py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-2xl font-black">اختر السنة الدراسية</h3>
+      <p class="text-sm text-slate-500">من السنة الأولى إلى السابعة</p>
+    </div>
+    <div id="yearTabs" class="flex gap-2 overflow-x-auto scrollbar-thin pb-2">
+      <!-- injected -->
+    </div>
+  </div>
+</section>
+
+<!-- Search & Summaries -->
+<section id="summaries" class="py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div class="flex-1 relative max-w-xl">
+        <i class="ri-search-line absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+        <input id="searchInput" type="text" placeholder="ابحث عن ملخص، موديول، أو اسم الطالب..." class="w-full pr-12 pl-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition font-medium" />
+      </div>
+      <div class="flex items-center gap-2">
+        <select id="sortSelect" class="px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-emerald-500/20">
+          <option value="newest">الأحدث</option>
+          <option value="popular">الأكثر تحميلاً</option>
+          <option value="liked">الأكثر إعجاباً</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="summariesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <!-- injected -->
+    </div>
+
+    <div id="emptyState" class="hidden text-center py-20">
+      <div class="w-20 h-20 mx-auto rounded-3xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+        <i class="ri-inbox-line text-3xl text-slate-400"></i>
+      </div>
+      <h4 class="font-black text-xl mb-2">لا توجد ملخصات بعد</h4>
+      <p class="text-slate-500 mb-6">كن أول من يتبرع بملخص لهذه السنة!</p>
+      <button id="emptyUpload" class="px-5 py-3 rounded-2xl bg-emerald-600 text-white font-bold">ارفع ملخصك</button>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-20 border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h3 class="text-3xl font-black mb-4">لماذا الجوهرة في الطب؟</h3>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+          لأننا نؤمن أن العلم يزدهر بالمشاركة. كل ملخص ترفعه قد ينقذ زميلك في ليلة امتحان، ويختصر عليه ساعات من التشتت. المنصة مجانية، طلابية، ومفتوحة للجميع.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-emerald-600 text-xl mt-0.5"></i><span><strong>موثوقة:</strong> ملخصات من طلبة متفوقين في نفس جامعتك.</span></li>
+          <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-emerald-600 text-xl mt-0.5"></i><span><strong>منظمة:</strong> مصنفة حسب السنة والموديول.</span></li>
+          <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-emerald-600 text-xl mt-0.5"></i><span><strong>مجانية للأبد:</strong> بدون إعلانات مزعجة أو اشتراكات.</span></li>
+        </ul>
+      </div>
+      <div class="relative">
+        <div class="rounded-[2rem] bg-gradient-to-br from-slate-900 to-slate-700 dark:from-slate-800 dark:to-slate-900 p-8 text-white shadow-soft">
+          <i class="ri-double-quotes-r text-4xl text-emerald-400"></i>
+          <p class="text-xl font-bold leading-relaxed mt-4">
+            "خير الناس أنفعهم للناس. تبرعك بملخص واحد قد يكون سبب نجاح دفعة كاملة."
+          </p>
+          <p class="mt-6 text-emerald-300 font-bold">— مجتمع الجوهرة في الطب</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 border-t border-slate-200 dark:border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+          <i class="ri-heart-pulse-line text-white"></i>
+        </div>
+        <span class="font-black">الجوهرة في الطب © 2025</span>
+      </div>
+      <p class="text-sm text-slate-500">صُنع بحب لطلبة الطب - جامعة الجزائر 1 بن يوسف بن خدة</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Modals -->
+<!-- Auth Modal -->
+<div id="authModal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-[1.75rem] bg-white dark:bg-slate-950 shadow-soft border border-slate-200 dark:border-slate-800 p-7 relative animate-fadeInUp">
+      <button id="closeAuth" class="absolute left-4 top-4 w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center"><i class="ri-close-line text-xl"></i></button>
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-3">
+          <i class="ri-user-heart-line text-white text-2xl"></i>
+        </div>
+        <h3 id="authTitle" class="text-2xl font-black">إنشاء حساب جديد</h3>
+        <p class="text-sm text-slate-500 mt-1">انضم لمجتمع المتفوقين</p>
+      </div>
+      <form id="authForm" class="space-y-4">
+        <div id="nameField">
+          <label class="text-sm font-bold mb-1 block">الاسم الكامل</label>
+          <input id="authName" type="text" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="مثال: أمينة بن علي" />
+        </div>
+        <div>
+          <label class="text-sm font-bold mb-1 block">البريد الإلكتروني</label>
+          <input id="authEmail" type="email" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="you@univ-alger.dz" />
+        </div>
+        <div id="yearField">
+          <label class="text-sm font-bold mb-1 block">السنة الدراسية</label>
+          <select id="authYear" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 font-bold">
+            <option value="1">السنة الأولى</option>
+            <option value="2">السنة الثانية</option>
+            <option value="3">السنة الثالثة</option>
+            <option value="4">السنة الرابعة</option>
+            <option value="5">السنة الخامسة</option>
+            <option value="6">السنة السادسة</option>
+            <option value="7">السنة السابعة</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-bold mb-1 block">كلمة المرور</label>
+          <input id="authPassword" type="password" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="••••••••" />
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl font-black bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow-glow hover:scale-[1.01] transition">متابعة</button>
+      </form>
+      <p class="text-center text-sm mt-5 text-slate-500">
+        <span id="authSwitchText">لديك حساب؟</span>
+        <button id="authSwitch" class="font-bold text-emerald-600 hover:underline">سجل الدخول</button>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Upload Modal -->
+<div id="uploadModal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="w-full max-w-2xl rounded-[1.75rem] bg-white dark:bg-slate-950 shadow-soft border border-slate-200 dark:border-slate-800 p-7 relative my-8 animate-fadeInUp">
+      <button id="closeUpload" class="absolute left-4 top-4 w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center"><i class="ri-close-line text-xl"></i></button>
+      <div class="mb-6">
+        <h3 class="text-2xl font-black">تبرع بملخص جديد</h3>
+        <p class="text-sm text-slate-500 mt-1">ساعد زملاءك واكسب الأجر</p>
+      </div>
+      <form id="uploadForm" class="grid md:grid-cols-2 gap-4">
+        <div class="md:col-span-2">
+          <label class="text-sm font-bold mb-1 block">عنوان الملخص</label>
+          <input id="upTitle" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="مثال: ملخص كامل فيزيولوجيا القلب" />
+        </div>
+        <div>
+          <label class="text-sm font-bold mb-1 block">السنة الدراسية</label>
+          <select id="upYear" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 font-bold">
+            <option value="">اختر السنة</option>
+            <option value="1">السنة الأولى</option>
+            <option value="2">السنة الثانية</option>
+            <option value="3">السنة الثالثة</option>
+            <option value="4">السنة الرابعة</option>
+            <option value="5">السنة الخامسة</option>
+            <option value="6">السنة السادسة</option>
+            <option value="7">السنة السابعة</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-bold mb-1 block">الموديول / المادة</label>
+          <input id="upModule" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="مثال: Physiologie" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-bold mb-1 block">وصف مختصر</label>
+          <textarea id="upDesc" rows="3" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="اشرح محتوى الملخص وما يميزه..."></textarea>
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-bold mb-1 block">رفع الملف (PDF)</label>
+          <div class="relative border-2 border-dashed border-emerald-300 dark:border-emerald-800 rounded-2xl p-6 text-center bg-emerald-50/50 dark:bg-emerald-950/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition cursor-pointer">
+            <input id="upFile" type="file" accept=".pdf" class="absolute inset-0 opacity-0 cursor-pointer" />
+            <i class="ri-upload-cloud-2-line text-4xl text-emerald-600 mb-2 block"></i>
+            <p class="font-bold">اسحب الملف هنا أو انقر للاختيار</p>
+            <p id="fileName" class="text-xs text-slate-500 mt-1">PDF حتى 20MB</p>
+          </div>
+        </div>
+        <div class="md:col-span-2 flex gap-3 pt-2">
+          <button type="submit" class="flex-1 py-3 rounded-xl font-black bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow-glow">نشر الملخص</button>
+          <button type="button" id="cancelUpload" class="px-6 py-3 rounded-xl font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] hidden">
+  <div class="px-5 py-3 rounded-2xl bg-slate-900 text-white shadow-soft flex items-center gap-3 font-bold">
+    <i id="toastIcon" class="ri-checkbox-circle-fill text-emerald-400 text-xl"></i>
+    <span id="toastMsg">تم بنجاح</span>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+// State
+let currentUser = null;
+let summaries = [];
+let users = [];
+let activeYear = 'all';
+let authMode = 'register';
+
+// Init
+function init() {
+  loadData();
+  seedIfEmpty();
+  renderYearTabs();
+  renderSummaries();
+  renderLatest();
+  updateStats();
+  updateAuthUI();
+  bindEvents();
+}
+function loadData() {
+  users = JSON.parse(localStorage.getItem('jawhara_users') || '[]');
+  summaries = JSON.parse(localStorage.getItem('jawhara_summaries') || '[]');
+  currentUser = JSON.parse(localStorage.getItem('jawhara_current_user') || 'null');
+}
+function saveData() {
+  localStorage.setItem('jawhara_users', JSON.stringify(users));
+  localStorage.setItem('jawhara_summaries', JSON.stringify(summaries));
+  localStorage.setItem('jawhara_current_user', JSON.stringify(currentUser));
+}
+function seedIfEmpty() {
+  if (summaries.length === 0) {
+    summaries = [
+      {id:'s1', title:'ملخص شامل في التشريح - الطرف العلوي', year:'1', module:'Anatomie', desc:'ملخص منظم مع صور توضيحية وأسئلة سنوات سابقة.', fileName:'anatomie_upper.pdf', uploader:'سارة بوعلام', uploaderId:'u1', date: Date.now()-86400000*2, likes:34, downloads:128, likedBy:[]},
+      {id:'s2', title:'فيزيولوجيا القلب والأوعية', year:'2', module:'Physiologie', desc:'شرح مبسط مع مخططات.', fileName:'physio_cardio.pdf', uploader:'محمد أمين', uploaderId:'u2', date: Date.now()-86400000*5, likes:58, downloads:210, likedBy:[]},
+      {id:'s3', title:'سيميولوجيا الجهاز التنفسي', year:'3', module:'Sémiologie', desc:'ملخص عملي للفحص السريري.', fileName:'semio_resp.pdf', uploader:'ليلى قاسمي', uploaderId:'u3', date: Date.now()-86400000*1, likes:22, downloads:95, likedBy:[]},
+      {id:'s4', title:'فارماكولوجيا المضادات الحيوية', year:'4', module:'Pharmacologie', desc:'جداول مقارنة وجرعات.', fileName:'atb.pdf', uploader:'ياسين', uploaderId:'u4', date: Date.now()-86400000*7, likes:71, downloads:340, likedBy:[]},
+      {id:'s5', title:'طب الأطفال - النمو والتطور', year:'5', module:'Pédiatrie', desc:'ملخص محاضرات البروفيسور.', fileName:'pediatrie.pdf', uploader:'نور', uploaderId:'u5', date: Date.now()-86400000*3, likes:41, downloads:176, likedBy:[]},
+    ];
+    users = [
+      {id:'u1', name:'سارة بوعلام', email:'sara@univ-alger.dz', year:'1', password:'123456'},
+      {id:'u2', name:'محمد أمين', email:'amin@univ-alger.dz', year:'2', password:'123456'},
+    ];
+    saveData();
+  }
+}
+
+// Render
+function renderYearTabs() {
+  const container = $('#yearTabs');
+  const years = [
+    {id:'all', label:'الكل', icon:'ri-apps-2-line'},
+    {id:'1', label:'السنة 1', icon:'ri-number-1'},
+    {id:'2', label:'السنة 2', icon:'ri-number-2'},
+    {id:'3', label:'السنة 3', icon:'ri-number-3'},
+    {id:'4', label:'السنة 4', icon:'ri-number-4'},
+    {id:'5', label:'السنة 5', icon:'ri-number-5'},
+    {id:'6', label:'السنة 6', icon:'ri-number-6'},
+    {id:'7', label:'السنة 7', icon:'ri-number-7'},
+  ];
+  container.innerHTML = years.map(y => `
+    <button data-year="${y.id}" class="year-tab group flex items-center gap-2 px-4 py-2.5 rounded-2xl font-extrabold text-sm whitespace-nowrap transition border ${activeYear===y.id ? 'bg-emerald-600 text-white border-emerald-600 shadow-glow' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-500'}">
+      <i class="${y.icon}"></i> ${y.label}
+    </button>
+  `).join('');
+  $$('.year-tab').forEach(btn => btn.onclick = () => {
+    activeYear = btn.dataset.year;
+    renderYearTabs();
+    renderSummaries();
+  });
+}
+
+function getFilteredSummaries() {
+  let list = [...summaries];
+  const q = $('#searchInput').value.trim().toLowerCase();
+  if (activeYear !== 'all') list = list.filter(s => s.year === activeYear);
+  if (q) list = list.filter(s => s.title.toLowerCase().includes(q) || s.module.toLowerCase().includes(q) || s.uploader.toLowerCase().includes(q));
+  const sort = $('#sortSelect').value;
+  if (sort === 'newest') list.sort((a,b)=> b.date - a.date);
+  if (sort === 'popular') list.sort((a,b)=> b.downloads - a.downloads);
+  if (sort === 'liked') list.sort((a,b)=> b.likes - a.likes);
+  return list;
+}
+
+function renderSummaries() {
+  const grid = $('#summariesGrid');
+  const list = getFilteredSummaries();
+  $('#emptyState').classList.toggle('hidden', list.length > 0);
+  grid.innerHTML = list.map(s => `
+    <div class="group relative rounded-[1.5rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300">
+      <div class="flex items-start justify-between gap-3 mb-3">
+        <span class="px-2.5 py-1 rounded-full text-xs font-black bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">سنة ${s.year}</span>
+        <button data-like="${s.id}" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-pink-100 dark:hover:bg-pink-950 transition ${s.likedBy?.includes(currentUser?.id)?'text-pink-600':''}">
+          <i class="ri-heart-3-${s.likedBy?.includes(currentUser?.id)?'fill':'line'} text-lg"></i>
+        </button>
+      </div>
+      <h4 class="font-extrabold text-lg leading-snug mb-1 line-clamp-2">${s.title}</h4>
+      <p class="text-xs font-bold text-cyan-700 dark:text-cyan-300 mb-2">${s.module}</p>
+      <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-4">${s.desc}</p>
+      <div class="flex items-center gap-2 text-xs text-slate-500 mb-4">
+        <img src="https://i.pravatar.cc/24?u=${s.uploaderId}" class="w-6 h-6 rounded-full" alt="">
+        <span class="font-bold">${s.uploader}</span>
+        <span>•</span>
+        <span>${timeAgo(s.date)}</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4 text-xs font-bold text-slate-500">
+          <span class="flex items-center gap-1"><i class="ri-heart-3-line"></i> ${s.likes}</span>
+          <span class="flex items-center gap-1"><i class="ri-download-2-line"></i> ${s.downloads}</span>
+        </div>
+        <button data-download="${s.id}" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</button>
+      </div>
+    </div>
+  `).join('');
+  // bind like/download
+  $$('[data-like]').forEach(b => b.onclick = () => toggleLike(b.dataset.like));
+  $$('[data-download]').forEach(b => b.onclick = () => downloadSummary(b.dataset.download));
+}
+
+function renderLatest() {
+  const list = [...summaries].sort((a,b)=>b.date-a.date).slice(0,5);
+  $('#latestList').innerHTML = list.map(s => `
+    <div class="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white font-black">س${s.year}</div>
+      <div class="flex-1 min-w-0">
+        <p class="font-bold text-sm truncate">${s.title}</p>
+        <p class="text-xs text-slate-500">${s.uploader} • ${timeAgo(s.date)}</p>
+      </div>
+      <span class="text-xs font-bold px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">${s.downloads}</span>
+    </div>
+  `).join('');
+}
+
+function updateStats() {
+  $('#statSummaries').textContent = summaries.length;
+  $('#statUsers').textContent = users.length;
+  $('#statDownloads').textContent = summaries.reduce((a,b)=>a+b.downloads,0);
+}
+
+function updateAuthUI() {
+  const logged = !!currentUser;
+  $('#authButtons').classList.toggle('hidden', logged);
+  $('#userMenu').classList.toggle('hidden', !logged);
+  $('#userMenu').classList.toggle('flex', logged);
+  $('#mobileUploadBtn').classList.toggle('hidden', !logged);
+  if (logged) {
+    $('#avatarBtn').textContent = currentUser.name.split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase();
+    $('#userName').textContent = currentUser.name;
+    $('#userEmail').textContent = currentUser.email;
+  }
+}
+
+// Helpers
+function timeAgo(ts) {
+  const d = Math.floor((Date.now()-ts)/1000);
+  if (d<60) return 'الآن';
+  if (d<3600) return ${Math.floor(d/60)}د;
+  if (d<86400) return ${Math.floor(d/3600)}س;
+  return ${Math.floor(d/86400)}ي;
+}
+function showToast(msg, icon='ri-checkbox-circle-fill') {
+  $('#toastMsg').textContent = msg;
+  $('#toastIcon').className = icon + ' text-emerald-400 text-xl';
+  $('#toast').classList.remove('hidden');
+  setTimeout(()=> $('#toast').classList.add('hidden'), 3000);
+}
+function openModal(id){ $(id).classList.remove('hidden'); document.body.style.overflow='hidden'; }
+function closeModal(id){ $(id).classList.add('hidden'); document.body.style.overflow=''; }
+
+// Events
+function bindEvents() {
+  // Dark mode
+  const dark = localStorage.getItem('jawhara_dark') === '1' || (!localStorage.getItem('jawhara_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.classList.toggle('dark', dark);
+  $('#darkToggle').onclick = () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('jawhara_dark', document.documentElement.classList.contains('dark') ? '1' : '0');
+  };
+
+  // Auth modal
+  $('#loginBtn').onclick = () => { authMode='login'; setAuthMode(); openModal('#authModal'); };
+  $('#registerBtn').onclick = () => { authMode='register'; setAuthMode(); openModal('#authModal'); };
+  $('#closeAuth').onclick = () => closeModal('#authModal');
+  $('#authSwitch').onclick = () => { authMode = authMode==='login'?'register':'login'; setAuthMode(); };
+
+  function setAuthMode() {
+    $('#authTitle').textContent = authMode==='login'?'مرحباً بعودتك':'إنشاء حساب جديد';
+    $('#nameField').classList.toggle('hidden', authMode==='login');
+    $('#yearField').classList.toggle('hidden', authMode==='login');
+    $('#authSwitchText').textContent = authMode==='login'?'ليس لديك حساب؟':'لديك حساب؟';
+    $('#authSwitch').textContent = authMode==='login'?'إنشاء حساب':'سجل الدخول';
+  }
+
+  $('#authForm').onsubmit = (e) => {
+    e.preventDefault();
+    const email = $('#authEmail').value.trim().toLowerCase();
+    const pass = $('#authPassword').value;
+    if (authMode==='register') {
+      const name = $('#authName').value.trim();
+      const year = $('#authYear').value;
+      if (!name || !email || !pass) return showToast('أكمل كل الحقول', 'ri-error-warning-fill');
+      if (users.find(u=>u.email===email)) return showToast('البريد مستخدم مسبقاً', 'ri-error-warning-fill');
+      const user = {id:'u'+Date.now(), name, email, year, password:pass};
+      users.push(user);
+      currentUser = user;
+      saveData();
+      closeModal('#authModal');
+      updateAuthUI();
+      updateStats();
+      showToast('تم إنشاء الحساب بنجاح');
+    } else {
+      const user = users.find(u=>u.email===email && u.password===pass);
+      if (!user) return showToast('بيانات الدخول غير صحيحة', 'ri-error-warning-fill');
+      currentUser = user;
+      saveData();
+      closeModal('#authModal');
+      updateAuthUI();
+      showToast('مرحباً بعودتك ' + user.name.split(' ')[0]);
+    }
+    renderSummaries();
+  };
+
+  // User menu
+  $('#avatarBtn').onclick = () => $('#dropdown').classList.toggle('hidden');
+  document.addEventListener('click', e => { if (!e.target.closest('#avatarBtn') && !e.target.closest('#dropdown')) $('#dropdown').classList.add('hidden'); });
+  $('#logoutBtn').onclick = () => { currentUser=null; saveData(); updateAuthUI(); showToast('تم تسجيل الخروج'); renderSummaries(); };
+
+  // Upload
+  const openUpload = () => {
+    if (!currentUser) { authMode='login'; setAuthMode(); openModal('#authModal'); showToast('سجل دخولك أولاً', 'ri-lock-line'); return; }
+    openModal('#uploadModal');
+  };
+  $('#uploadBtn').onclick = openUpload;
+  $('#heroUpload').onclick = openUpload;
+  $('#mobileUploadBtn').onclick = openUpload;
+  $('#emptyUpload').onclick = openUpload;
+  $('#closeUpload').onclick = () => closeModal('#uploadModal');
+  $('#cancelUpload').onclick = () => closeModal('#uploadModal');
+  $('#upFile').onchange = e => {
+    const f = e.target.files[0];
+    $('#fileName').textContent = f ? f.name : 'PDF حتى 20MB';
+  };
+  $('#uploadForm').onsubmit = e => {
+    e.preventDefault();
+    const title = $('#upTitle').value.trim();
+    const year = $('#upYear').value;
+    const module = $('#upModule').value.trim();
+    const desc = $('#upDesc').value.trim();
+    const file = $('#upFile').files[0];
+    if (!title || !year || !module) return showToast('أكمل الحقول المطلوبة', 'ri-error-warning-fill');
+    const summary = {
+      id:'s'+Date.now(),
+      title, year, module, desc: desc||'بدون وصف',
+      fileName: file? file.name : 'ملخص.pdf',
+      uploader: currentUser.name,
+      uploaderId: currentUser.id,
+      date: Date.now(),
+      likes:0, downloads:0, likedBy:[]
+    };
+    summaries.unshift(summary);
+    saveData();
+    closeModal('#uploadModal');
+    e.target.reset();
+    $('#fileName').textContent='PDF حتى 20MB';
+    renderSummaries();
+    renderLatest();
+    updateStats();
+    showToast('تم نشر ملخصك بنجاح!');
+  };
+
+  // Search & sort
+  $('#searchInput').oninput = renderSummaries;
+  $('#sortSelect').onchange = renderSummaries;
+
+  // Mobile menu
+  $('#mobileMenuBtn').onclick = () => $('#mobileMenu').classList.toggle('hidden');
+}
+
+function toggleLike(id) {
+  if (!currentUser) return showToast('سجل دخولك للإعجاب', 'ri-lock-line');
+  const s = summaries.find(x=>x.id===id);
+  if (!s) return;
+  s.likedBy = s.likedBy || [];
+  const idx = s.likedBy.indexOf(currentUser.id);
+  if (idx>-1) { s.likedBy.splice(idx,1); s.likes--; } else { s.likedBy.push(currentUser.id); s.likes++; }
+  saveData();
+  renderSummaries();
+}
+function downloadSummary(id) {
+  const s = summaries.find(x=>x.id===id);
+  if (!s) return;
+  s.downloads++;
+  saveData();
+  renderSummaries();
+  renderLatest();
+  updateStats();
+  showToast('بدأ التحميل: ' + s.fileName, 'ri-download-2-line');
+  // Simulate download
+  const a = document.createElement('a');
+  a.href = '#';
+  a.download = s.fileName;
+  a.click();
+}
+
+init();
+</script>
+</body>
+</html>
