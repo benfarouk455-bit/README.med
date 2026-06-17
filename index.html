@@ -671,5 +671,19 @@ function downloadSummary(id) {
 
 init();
 </script>
-</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
+const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k;
+
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+console.log("Supabase connected");
+</script>  
+  <body>
 </html>
