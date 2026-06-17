@@ -672,50 +672,10 @@ function downloadSummary(id) {
 init();
 </script>
 
-window.addEventListener('load', function() {
+<input type="file" id="fileInput" accept=".pdf" style="display:none" />
+<p id="status" class="hidden"></p>
 
-  let isLogin = true;
-
-  document.getElementById('authSwitch').addEventListener('click', function() {
-    isLogin = !isLogin;
-    document.getElementById('authTitle').innerText = isLogin ? 'أهلاً بعودتك' : 'إنشاء حساب جديد';
-    document.getElementById('authSwitchText').innerText = isLogin ? 'ليس لديك حساب؟' : 'لديك حساب؟';
-    this.innerText = isLogin ? 'سجل الدخول' : 'أنشئ حساباً';
-  });
-
-  document.getElementById('authForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = document.getElementById('authEmail').value;
-    const password = document.getElementById('authPassword').value;
-    if (isLogin) {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) { alert('خطأ: ' + error.message); return; }
-      alert('✅ تم تسجيل الدخول!');
-    } else {
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) { alert('خطأ: ' + error.message); return; }
-      alert('✅ تم إنشاء الحساب!');
-    }
-    document.getElementById('authModal').classList.add('hidden');
-  });
-
-  document.getElementById('heroUpload').addEventListener('click', function() {
-    document.getElementById('fileInput').click();
-  });
-
-  document.getElementById('fileInput').addEventListener('change', function() {
-    uploadPDF();
-  });
-
-});
-
-async function uploadPDF() {
-  const file = document.getElementById('fileInput').files[0];
-  if (!file) return;
-  const { data, error } = await supabase.storage.from('pdfs').upload(`${Date.now()}_${file.name}`, file);
-  if (error) { document.getElementById('status').innerText = 'خطأ: ' + error.message; return; }
-  document.getElementById('status').innerText = '✅ تم الرفع!';
-}
-</script>
+</body>
+</html>
 </body>
 </html>
