@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 tailwind.config = {
   darkMode: 'class',
@@ -94,7 +95,6 @@ body { -webkit-font-smoothing: antialiased; }
       </div>
     </div>
   </div>
-  <!-- Mobile Menu -->
   <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 glass">
     <div class="px-4 py-3 flex flex-col gap-2 text-sm font-bold">
       <a href="#summaries" class="py-2">الملخصات</a>
@@ -130,7 +130,6 @@ body { -webkit-font-smoothing: antialiased; }
             تصفح الملخصات
           </a>
         </div>
-        <!-- Stats -->
         <div class="mt-10 grid grid-cols-3 gap-4 max-w-md">
           <div class="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center">
             <p id="statSummaries" class="text-2xl font-black text-emerald-600">0</p>
@@ -153,12 +152,9 @@ body { -webkit-font-smoothing: antialiased; }
               <h3 class="font-extrabold text-lg">أحدث التبرعات</h3>
               <span class="text-xs px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 font-bold">مباشر</span>
             </div>
-            <div id="latestList" class="space-y-3 max-h-[380px] overflow-y-auto scrollbar-thin pr-2">
-              <!-- injected -->
-            </div>
+            <div id="latestList" class="space-y-3 max-h-[380px] overflow-y-auto scrollbar-thin pr-2"></div>
           </div>
         </div>
-        <div class="absolute -bottom-6 -left-6 w-24 h-24 rounded-3xl bg-cyan-500/20 blur-2xl"></div>
       </div>
     </div>
   </div>
@@ -171,9 +167,7 @@ body { -webkit-font-smoothing: antialiased; }
       <h3 class="text-2xl font-black">اختر السنة الدراسية</h3>
       <p class="text-sm text-slate-500">من السنة الأولى إلى السابعة</p>
     </div>
-    <div id="yearTabs" class="flex gap-2 overflow-x-auto scrollbar-thin pb-2">
-      <!-- injected -->
-    </div>
+    <div id="yearTabs" class="flex gap-2 overflow-x-auto scrollbar-thin pb-2"></div>
   </div>
 </section>
 
@@ -185,19 +179,13 @@ body { -webkit-font-smoothing: antialiased; }
         <i class="ri-search-line absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
         <input id="searchInput" type="text" placeholder="ابحث عن ملخص، موديول، أو اسم الطالب..." class="w-full pr-12 pl-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition font-medium" />
       </div>
-      <div class="flex items-center gap-2">
-        <select id="sortSelect" class="px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-emerald-500/20">
-          <option value="newest">الأحدث</option>
-          <option value="popular">الأكثر تحميلاً</option>
-          <option value="liked">الأكثر إعجاباً</option>
-        </select>
-      </div>
+      <select id="sortSelect" class="px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-bold text-sm focus:outline-none focus:ring-4 focus:ring-emerald-500/20">
+        <option value="newest">الأحدث</option>
+        <option value="popular">الأكثر تحميلاً</option>
+        <option value="liked">الأكثر إعجاباً</option>
+      </select>
     </div>
-
-    <div id="summariesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-      <!-- injected -->
-    </div>
-
+    <div id="summariesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
     <div id="emptyState" class="hidden text-center py-20">
       <div class="w-20 h-20 mx-auto rounded-3xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
         <i class="ri-inbox-line text-3xl text-slate-400"></i>
@@ -215,9 +203,7 @@ body { -webkit-font-smoothing: antialiased; }
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div>
         <h3 class="text-3xl font-black mb-4">لماذا الجوهرة في الطب؟</h3>
-        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-          لأننا نؤمن أن العلم يزدهر بالمشاركة. كل ملخص ترفعه قد ينقذ زميلك في ليلة امتحان، ويختصر عليه ساعات من التشتت. المنصة مجانية، طلابية، ومفتوحة للجميع.
-        </p>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">لأننا نؤمن أن العلم يزدهر بالمشاركة.</p>
         <ul class="space-y-3">
           <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-emerald-600 text-xl mt-0.5"></i><span><strong>موثوقة:</strong> ملخصات من طلبة متفوقين في نفس جامعتك.</span></li>
           <li class="flex items-start gap-3"><i class="ri-checkbox-circle-fill text-emerald-600 text-xl mt-0.5"></i><span><strong>منظمة:</strong> مصنفة حسب السنة والموديول.</span></li>
@@ -225,11 +211,9 @@ body { -webkit-font-smoothing: antialiased; }
         </ul>
       </div>
       <div class="relative">
-        <div class="rounded-[2rem] bg-gradient-to-br from-slate-900 to-slate-700 dark:from-slate-800 dark:to-slate-900 p-8 text-white shadow-soft">
+        <div class="rounded-[2rem] bg-gradient-to-br from-slate-900 to-slate-700 p-8 text-white shadow-soft">
           <i class="ri-double-quotes-r text-4xl text-emerald-400"></i>
-          <p class="text-xl font-bold leading-relaxed mt-4">
-            "خير الناس أنفعهم للناس. تبرعك بملخص واحد قد يكون سبب نجاح دفعة كاملة."
-          </p>
+          <p class="text-xl font-bold leading-relaxed mt-4">"خير الناس أنفعهم للناس."</p>
           <p class="mt-6 text-emerald-300 font-bold">— مجتمع الجوهرة في الطب</p>
         </div>
       </div>
@@ -247,12 +231,11 @@ body { -webkit-font-smoothing: antialiased; }
         </div>
         <span class="font-black">الجوهرة في الطب © 2025</span>
       </div>
-      <p class="text-sm text-slate-500">صُنع بحب لطلبة الطب - جامعة الجزائر 1 بن يوسف بن خدة</p>
+      <p class="text-sm text-slate-500">صُنع بحب لطلبة الطب - جامعة الجزائر 1</p>
     </div>
   </div>
 </footer>
 
-<!-- Modals -->
 <!-- Auth Modal -->
 <div id="authModal" class="fixed inset-0 z-[100] hidden">
   <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
@@ -346,6 +329,9 @@ body { -webkit-font-smoothing: antialiased; }
             <p id="fileName" class="text-xs text-slate-500 mt-1">PDF حتى 20MB</p>
           </div>
         </div>
+        <div class="md:col-span-2">
+          <p id="uploadStatus" class="text-sm font-bold text-center text-emerald-600 hidden"></p>
+        </div>
         <div class="md:col-span-2 flex gap-3 pt-2">
           <button type="submit" class="flex-1 py-3 rounded-xl font-black bg-gradient-to-r from-emerald-600 to-cyan-600 text-white shadow-glow">نشر الملخص</button>
           <button type="button" id="cancelUpload" class="px-6 py-3 rounded-xl font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">إلغاء</button>
@@ -364,57 +350,73 @@ body { -webkit-font-smoothing: antialiased; }
 </div>
 
 <script>
+// ========== Supabase ==========
+const _supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
+const _supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k";
+const sb = window.supabase.createClient(_supabaseUrl, _supabaseKey);
+
+// ========== Helpers ==========
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
-// State
 let currentUser = null;
 let summaries = [];
-let users = [];
 let activeYear = 'all';
 let authMode = 'register';
 
-// Init
-function init() {
-  loadData();
-  seedIfEmpty();
-  renderYearTabs();
-  renderSummaries();
-  renderLatest();
-  updateStats();
-  updateAuthUI();
-  bindEvents();
+function showToast(msg, icon='ri-checkbox-circle-fill') {
+  $('#toastMsg').textContent = msg;
+  $('#toastIcon').className = icon + ' text-emerald-400 text-xl';
+  $('#toast').classList.remove('hidden');
+  setTimeout(()=> $('#toast').classList.add('hidden'), 3000);
 }
-function loadData() {
-  users = JSON.parse(localStorage.getItem('jawhara_users') || '[]');
-  summaries = JSON.parse(localStorage.getItem('jawhara_summaries') || '[]');
-  currentUser = JSON.parse(localStorage.getItem('jawhara_current_user') || 'null');
+function openModal(id){ $(id).classList.remove('hidden'); document.body.style.overflow='hidden'; }
+function closeModal(id){ $(id).classList.add('hidden'); document.body.style.overflow=''; }
+function timeAgo(ts) {
+  const d = Math.floor((Date.now()-new Date(ts).getTime())/1000);
+  if (d<60) return 'الآن';
+  if (d<3600) return Math.floor(d/60)+'د';
+  if (d<86400) return Math.floor(d/3600)+'س';
+  return Math.floor(d/86400)+'ي';
 }
-function saveData() {
-  localStorage.setItem('jawhara_users', JSON.stringify(users));
-  localStorage.setItem('jawhara_summaries', JSON.stringify(summaries));
-  localStorage.setItem('jawhara_current_user', JSON.stringify(currentUser));
-}
-function seedIfEmpty() {
-  if (summaries.length === 0) {
-    summaries = [
-      {id:'s1', title:'ملخص شامل في التشريح - الطرف العلوي', year:'1', module:'Anatomie', desc:'ملخص منظم مع صور توضيحية وأسئلة سنوات سابقة.', fileName:'anatomie_upper.pdf', uploader:'سارة بوعلام', uploaderId:'u1', date: Date.now()-86400000*2, likes:34, downloads:128, likedBy:[]},
-      {id:'s2', title:'فيزيولوجيا القلب والأوعية', year:'2', module:'Physiologie', desc:'شرح مبسط مع مخططات.', fileName:'physio_cardio.pdf', uploader:'محمد أمين', uploaderId:'u2', date: Date.now()-86400000*5, likes:58, downloads:210, likedBy:[]},
-      {id:'s3', title:'سيميولوجيا الجهاز التنفسي', year:'3', module:'Sémiologie', desc:'ملخص عملي للفحص السريري.', fileName:'semio_resp.pdf', uploader:'ليلى قاسمي', uploaderId:'u3', date: Date.now()-86400000*1, likes:22, downloads:95, likedBy:[]},
-      {id:'s4', title:'فارماكولوجيا المضادات الحيوية', year:'4', module:'Pharmacologie', desc:'جداول مقارنة وجرعات.', fileName:'atb.pdf', uploader:'ياسين', uploaderId:'u4', date: Date.now()-86400000*7, likes:71, downloads:340, likedBy:[]},
-      {id:'s5', title:'طب الأطفال - النمو والتطور', year:'5', module:'Pédiatrie', desc:'ملخص محاضرات البروفيسور.', fileName:'pediatrie.pdf', uploader:'نور', uploaderId:'u5', date: Date.now()-86400000*3, likes:41, downloads:176, likedBy:[]},
-    ];
-    users = [
-      {id:'u1', name:'سارة بوعلام', email:'sara@univ-alger.dz', year:'1', password:'123456'},
-      {id:'u2', name:'محمد أمين', email:'amin@univ-alger.dz', year:'2', password:'123456'},
-    ];
-    saveData();
+
+// ========== Auth UI ==========
+function updateAuthUI() {
+  const logged = !!currentUser;
+  $('#authButtons').classList.toggle('hidden', logged);
+  $('#userMenu').classList.toggle('hidden', !logged);
+  $('#userMenu').classList.toggle('flex', logged);
+  $('#mobileUploadBtn').classList.toggle('hidden', !logged);
+  if (logged) {
+    $('#avatarBtn').textContent = currentUser.user_metadata?.name
+      ? currentUser.user_metadata.name.split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase()
+      : currentUser.email[0].toUpperCase();
+    $('#userName').textContent = currentUser.user_metadata?.name || currentUser.email;
+    $('#userEmail').textContent = currentUser.email;
   }
 }
 
-// Render
+function setAuthMode(mode) {
+  authMode = mode;
+  $('#authTitle').textContent = mode==='login' ? 'مرحباً بعودتك' : 'إنشاء حساب جديد';
+  $('#nameField').classList.toggle('hidden', mode==='login');
+  $('#yearField').classList.toggle('hidden', mode==='login');
+  $('#authSwitchText').textContent = mode==='login' ? 'ليس لديك حساب؟' : 'لديك حساب؟';
+  $('#authSwitch').textContent = mode==='login' ? 'إنشاء حساب' : 'سجل الدخول';
+}
+
+// ========== Summaries ==========
+async function loadSummaries() {
+  const { data, error } = await sb.from('summaries').select('*').order('created_at', { ascending: false });
+  if (!error && data) {
+    summaries = data;
+    renderSummaries();
+    renderLatest();
+    updateStats();
+  }
+}
+
 function renderYearTabs() {
-  const container = $('#yearTabs');
   const years = [
     {id:'all', label:'الكل', icon:'ri-apps-2-line'},
     {id:'1', label:'السنة 1', icon:'ri-number-1'},
@@ -425,8 +427,8 @@ function renderYearTabs() {
     {id:'6', label:'السنة 6', icon:'ri-number-6'},
     {id:'7', label:'السنة 7', icon:'ri-number-7'},
   ];
-  container.innerHTML = years.map(y => `
-    <button data-year="${y.id}" class="year-tab group flex items-center gap-2 px-4 py-2.5 rounded-2xl font-extrabold text-sm whitespace-nowrap transition border ${activeYear===y.id ? 'bg-emerald-600 text-white border-emerald-600 shadow-glow' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-500'}">
+  $('#yearTabs').innerHTML = years.map(y => `
+    <button data-year="${y.id}" class="year-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-extrabold text-sm whitespace-nowrap transition border ${activeYear===y.id ? 'bg-emerald-600 text-white border-emerald-600 shadow-glow' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-500'}">
       <i class="${y.icon}"></i> ${y.label}
     </button>
   `).join('');
@@ -440,12 +442,12 @@ function renderYearTabs() {
 function getFilteredSummaries() {
   let list = [...summaries];
   const q = $('#searchInput').value.trim().toLowerCase();
-  if (activeYear !== 'all') list = list.filter(s => s.year === activeYear);
-  if (q) list = list.filter(s => s.title.toLowerCase().includes(q) || s.module.toLowerCase().includes(q) || s.uploader.toLowerCase().includes(q));
+  if (activeYear !== 'all') list = list.filter(s => String(s.year) === activeYear);
+  if (q) list = list.filter(s => (s.title||'').toLowerCase().includes(q) || (s.module||'').toLowerCase().includes(q) || (s.uploader||'').toLowerCase().includes(q));
   const sort = $('#sortSelect').value;
-  if (sort === 'newest') list.sort((a,b)=> b.date - a.date);
-  if (sort === 'popular') list.sort((a,b)=> b.downloads - a.downloads);
-  if (sort === 'liked') list.sort((a,b)=> b.likes - a.likes);
+  if (sort === 'newest') list.sort((a,b)=> new Date(b.created_at)-new Date(a.created_at));
+  if (sort === 'popular') list.sort((a,b)=> (b.downloads||0)-(a.downloads||0));
+  if (sort === 'liked') list.sort((a,b)=> (b.likes||0)-(a.likes||0));
   return list;
 }
 
@@ -457,87 +459,47 @@ function renderSummaries() {
     <div class="group relative rounded-[1.5rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300">
       <div class="flex items-start justify-between gap-3 mb-3">
         <span class="px-2.5 py-1 rounded-full text-xs font-black bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">سنة ${s.year}</span>
-        <button data-like="${s.id}" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-pink-100 dark:hover:bg-pink-950 transition ${s.likedBy?.includes(currentUser?.id)?'text-pink-600':''}">
-          <i class="ri-heart-3-${s.likedBy?.includes(currentUser?.id)?'fill':'line'} text-lg"></i>
-        </button>
       </div>
-      <h4 class="font-extrabold text-lg leading-snug mb-1 line-clamp-2">${s.title}</h4>
-      <p class="text-xs font-bold text-cyan-700 dark:text-cyan-300 mb-2">${s.module}</p>
-      <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-4">${s.desc}</p>
+      <h4 class="font-extrabold text-lg leading-snug mb-1 line-clamp-2">${s.title||''}</h4>
+      <p class="text-xs font-bold text-cyan-700 dark:text-cyan-300 mb-2">${s.module||''}</p>
+      <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-4">${s.description||''}</p>
       <div class="flex items-center gap-2 text-xs text-slate-500 mb-4">
-        <img src="https://i.pravatar.cc/24?u=${s.uploaderId}" class="w-6 h-6 rounded-full" alt="">
-        <span class="font-bold">${s.uploader}</span>
+        <span class="font-bold">${s.uploader||'مجهول'}</span>
         <span>•</span>
-        <span>${timeAgo(s.date)}</span>
+        <span>${timeAgo(s.created_at)}</span>
       </div>
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-4 text-xs font-bold text-slate-500">
-          <span class="flex items-center gap-1"><i class="ri-heart-3-line"></i> ${s.likes}</span>
-          <span class="flex items-center gap-1"><i class="ri-download-2-line"></i> ${s.downloads}</span>
+          <span class="flex items-center gap-1"><i class="ri-download-2-line"></i> ${s.downloads||0}</span>
         </div>
-        <button data-download="${s.id}" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</button>
+        ${s.file_url ? <a href="${s.file_url}" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</a> : '<span class="text-xs text-slate-400">لا يوجد ملف</span>'}
       </div>
     </div>
   `).join('');
-  // bind like/download
-  $$('[data-like]').forEach(b => b.onclick = () => toggleLike(b.dataset.like));
-  $$('[data-download]').forEach(b => b.onclick = () => downloadSummary(b.dataset.download));
 }
 
 function renderLatest() {
-  const list = [...summaries].sort((a,b)=>b.date-a.date).slice(0,5);
-  $('#latestList').innerHTML = list.map(s => `
+  const list = [...summaries].slice(0,5);
+  $('#latestList').innerHTML = list.length ? list.map(s => `
     <div class="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-800 transition">
       <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white font-black">س${s.year}</div>
       <div class="flex-1 min-w-0">
-        <p class="font-bold text-sm truncate">${s.title}</p>
-        <p class="text-xs text-slate-500">${s.uploader} • ${timeAgo(s.date)}</p>
+        <p class="font-bold text-sm truncate">${s.title||''}</p>
+        <p class="text-xs text-slate-500">${s.uploader||'مجهول'} • ${timeAgo(s.created_at)}</p>
       </div>
-      <span class="text-xs font-bold px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">${s.downloads}</span>
     </div>
-  `).join('');
+  `).join('') : '<p class="text-center text-slate-400 text-sm py-4">لا توجد ملخصات بعد</p>';
 }
 
 function updateStats() {
   $('#statSummaries').textContent = summaries.length;
-  $('#statUsers').textContent = users.length;
-  $('#statDownloads').textContent = summaries.reduce((a,b)=>a+b.downloads,0);
+  $('#statDownloads').textContent = summaries.reduce((a,b)=>a+(b.downloads||0),0);
 }
 
-function updateAuthUI() {
-  const logged = !!currentUser;
-  $('#authButtons').classList.toggle('hidden', logged);
-  $('#userMenu').classList.toggle('hidden', !logged);
-  $('#userMenu').classList.toggle('flex', logged);
-  $('#mobileUploadBtn').classList.toggle('hidden', !logged);
-  if (logged) {
-    $('#avatarBtn').textContent = currentUser.name.split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase();
-    $('#userName').textContent = currentUser.name;
-    $('#userEmail').textContent = currentUser.email;
-  }
-}
-
-// Helpers
-function timeAgo(ts) {
-  const d = Math.floor((Date.now()-ts)/1000);
-  if (d<60) return 'الآن';
-  if (d<3600) return ${Math.floor(d/60)}د;
-  if (d<86400) return ${Math.floor(d/3600)}س;
-  return ${Math.floor(d/86400)}ي;
-}
-function showToast(msg, icon='ri-checkbox-circle-fill') {
-  $('#toastMsg').textContent = msg;
-  $('#toastIcon').className = icon + ' text-emerald-400 text-xl';
-  $('#toast').classList.remove('hidden');
-  setTimeout(()=> $('#toast').classList.add('hidden'), 3000);
-}
-function openModal(id){ $(id).classList.remove('hidden'); document.body.style.overflow='hidden'; }
-function closeModal(id){ $(id).classList.add('hidden'); document.body.style.overflow=''; }
-
-// Events
+// ========== Events ==========
 function bindEvents() {
   // Dark mode
-  const dark = localStorage.getItem('jawhara_dark') === '1' || (!localStorage.getItem('jawhara_dark') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const dark = localStorage.getItem('jawhara_dark') === '1';
   document.documentElement.classList.toggle('dark', dark);
   $('#darkToggle').onclick = () => {
     document.documentElement.classList.toggle('dark');
@@ -545,56 +507,59 @@ function bindEvents() {
   };
 
   // Auth modal
-  $('#loginBtn').onclick = () => { authMode='login'; setAuthMode(); openModal('#authModal'); };
-  $('#registerBtn').onclick = () => { authMode='register'; setAuthMode(); openModal('#authModal'); };
+  $('#loginBtn').onclick = () => { setAuthMode('login'); openModal('#authModal'); };
+  $('#registerBtn').onclick = () => { setAuthMode('register'); openModal('#authModal'); };
   $('#closeAuth').onclick = () => closeModal('#authModal');
-  $('#authSwitch').onclick = () => { authMode = authMode==='login'?'register':'login'; setAuthMode(); };
+  $('#authSwitch').onclick = () => setAuthMode(authMode==='login'?'register':'login');
 
-  function setAuthMode() {
-    $('#authTitle').textContent = authMode==='login'?'مرحباً بعودتك':'إنشاء حساب جديد';
-    $('#nameField').classList.toggle('hidden', authMode==='login');
-    $('#yearField').classList.toggle('hidden', authMode==='login');
-    $('#authSwitchText').textContent = authMode==='login'?'ليس لديك حساب؟':'لديك حساب؟';
-    $('#authSwitch').textContent = authMode==='login'?'إنشاء حساب':'سجل الدخول';
-  }
-
-  $('#authForm').onsubmit = (e) => {
+  // Auth form submit
+  $('#authForm').onsubmit = async (e) => {
     e.preventDefault();
-    const email = $('#authEmail').value.trim().toLowerCase();
-    const pass = $('#authPassword').value;
-    if (authMode==='register') {
+    const email = $('#authEmail').value.trim();
+    const password = $('#authPassword').value;
+
+    if (authMode === 'register') {
       const name = $('#authName').value.trim();
       const year = $('#authYear').value;
-      if (!name || !email || !pass) return showToast('أكمل كل الحقول', 'ri-error-warning-fill');
-      if (users.find(u=>u.email===email)) return showToast('البريد مستخدم مسبقاً', 'ri-error-warning-fill');
-      const user = {id:'u'+Date.now(), name, email, year, password:pass};
-      users.push(user);
-      currentUser = user;
-      saveData();
-      closeModal('#authModal');
-      updateAuthUI();
-      updateStats();
-      showToast('تم إنشاء الحساب بنجاح');
+      const { data, error } = await sb.auth.signUp({
+        email, password,
+        options: { data: { name, year } }
+      });
+      if (error) return showToast('خطأ: ' + error.message, 'ri-error-warning-fill');
+      currentUser = data.user;
+      showToast('تم إنشاء الحساب! تحقق من إيميلك ✅');
     } else {
-      const user = users.find(u=>u.email===email && u.password===pass);
-      if (!user) return showToast('بيانات الدخول غير صحيحة', 'ri-error-warning-fill');
-      currentUser = user;
-      saveData();
-      closeModal('#authModal');
-      updateAuthUI();
-      showToast('مرحباً بعودتك ' + user.name.split(' ')[0]);
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) return showToast('خطأ: ' + error.message, 'ri-error-warning-fill');
+      currentUser = data.user;
+      showToast('مرحباً بعودتك! ✅');
     }
-    renderSummaries();
+    closeModal('#authModal');
+    updateAuthUI();
+    $('#statUsers').textContent = '—';
   };
 
   // User menu
   $('#avatarBtn').onclick = () => $('#dropdown').classList.toggle('hidden');
-  document.addEventListener('click', e => { if (!e.target.closest('#avatarBtn') && !e.target.closest('#dropdown')) $('#dropdown').classList.add('hidden'); });
-  $('#logoutBtn').onclick = () => { currentUser=null; saveData(); updateAuthUI(); showToast('تم تسجيل الخروج'); renderSummaries(); };
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#avatarBtn') && !e.target.closest('#dropdown'))
+      $('#dropdown').classList.add('hidden');
+  });
+  $('#logoutBtn').onclick = async () => {
+    await sb.auth.signOut();
+    currentUser = null;
+    updateAuthUI();
+    showToast('تم تسجيل الخروج');
+  };
 
-  // Upload
+  // Open upload modal
   const openUpload = () => {
-    if (!currentUser) { authMode='login'; setAuthMode(); openModal('#authModal'); showToast('سجل دخولك أولاً', 'ri-lock-line'); return; }
+    if (!currentUser) {
+      setAuthMode('login');
+      openModal('#authModal');
+      showToast('سجل دخولك أولاً', 'ri-lock-line');
+      return;
+    }
     openModal('#uploadModal');
   };
   $('#uploadBtn').onclick = openUpload;
@@ -603,36 +568,64 @@ function bindEvents() {
   $('#emptyUpload').onclick = openUpload;
   $('#closeUpload').onclick = () => closeModal('#uploadModal');
   $('#cancelUpload').onclick = () => closeModal('#uploadModal');
+
+  // File name display
   $('#upFile').onchange = e => {
     const f = e.target.files[0];
     $('#fileName').textContent = f ? f.name : 'PDF حتى 20MB';
   };
-  $('#uploadForm').onsubmit = e => {
+
+  // Upload form submit
+  $('#uploadForm').onsubmit = async (e) => {
     e.preventDefault();
     const title = $('#upTitle').value.trim();
     const year = $('#upYear').value;
     const module = $('#upModule').value.trim();
     const desc = $('#upDesc').value.trim();
     const file = $('#upFile').files[0];
+
     if (!title || !year || !module) return showToast('أكمل الحقول المطلوبة', 'ri-error-warning-fill');
-    const summary = {
-      id:'s'+Date.now(),
-      title, year, module, desc: desc||'بدون وصف',
-      fileName: file? file.name : 'ملخص.pdf',
-      uploader: currentUser.name,
-      uploaderId: currentUser.id,
-      date: Date.now(),
-      likes:0, downloads:0, likedBy:[]
-    };
-    summaries.unshift(summary);
-    saveData();
+    if (!file) return showToast('اختر ملف PDF', 'ri-error-warning-fill');
+
+    $('#uploadStatus').textContent = 'جاري رفع الملف...';
+    $('#uploadStatus').classList.remove('hidden');
+
+    // Upload file to Supabase Storage
+    const fileName = ${Date.now()}_${file.name};
+    const { data: fileData, error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
+    if (fileError) {
+      $('#uploadStatus').textContent = 'خطأ في رفع الملف: ' + fileError.message;
+      return;
+    }
+
+    // Get public URL
+    const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
+    const fileUrl = urlData.publicUrl;
+
+    // Save to database
+    const { error: dbError } = await sb.from('summaries').insert([{
+      title,
+      year,
+      module,
+      description: desc || 'بدون وصف',
+      file_url: fileUrl,
+      uploader: currentUser.user_metadata?.name || currentUser.email,
+      uploader_id: currentUser.id,
+      downloads: 0,
+      likes: 0
+    }]);
+
+    if (dbError) {
+      $('#uploadStatus').textContent = 'خطأ في الحفظ: ' + dbError.message;
+      return;
+    }
+
+    $('#uploadStatus').classList.add('hidden');
     closeModal('#uploadModal');
     e.target.reset();
-    $('#fileName').textContent='PDF حتى 20MB';
-    renderSummaries();
-    renderLatest();
-    updateStats();
-    showToast('تم نشر ملخصك بنجاح!');
+    $('#fileName').textContent = 'PDF حتى 20MB';
+    showToast('تم نشر ملخصك بنجاح! 🎉');
+    loadSummaries();
   };
 
   // Search & sort
@@ -643,62 +636,19 @@ function bindEvents() {
   $('#mobileMenuBtn').onclick = () => $('#mobileMenu').classList.toggle('hidden');
 }
 
-function toggleLike(id) {
-  if (!currentUser) return showToast('سجل دخولك للإعجاب', 'ri-lock-line');
-  const s = summaries.find(x=>x.id===id);
-  if (!s) return;
-  s.likedBy = s.likedBy || [];
-  const idx = s.likedBy.indexOf(currentUser.id);
-  if (idx>-1) { s.likedBy.splice(idx,1); s.likes--; } else { s.likedBy.push(currentUser.id); s.likes++; }
-  saveData();
-  renderSummaries();
-}
-function downloadSummary(id) {
-  const s = summaries.find(x=>x.id===id);
-  if (!s) return;
-  s.downloads++;
-  saveData();
-  renderSummaries();
-  renderLatest();
-  updateStats();
-  showToast('بدأ التحميل: ' + s.fileName, 'ri-download-2-line');
-  // Simulate download
-  const a = document.createElement('a');
-  a.href = '#';
-  a.download = s.fileName;
-  a.click();
+// ========== Init ==========
+async function init() {
+  // Check existing session
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) currentUser = session.user;
+
+  renderYearTabs();
+  updateAuthUI();
+  bindEvents();
+  await loadSummaries();
 }
 
 init();
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<input type="file" id="fileInput" accept=".pdf" style="display:none" />
-<p id="status"></p>
-
-<script>
-const supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-document.getElementById('heroUpload').addEventListener('click', function() {
-  document.getElementById('fileInput').click();
-});
-
-document.getElementById('fileInput').addEventListener('change', async function() {
-  const file = this.files[0];
-  if (!file) return;
-  document.getElementById('status').innerText = 'جاري الرفع...';
-  const { data, error } = await supabase.storage
-    .from('pdfs')
-    .upload(`${Date.now()}_${file.name}`, file);
-  if (error) {
-    document.getElementById('status').innerText = 'خطأ: ' + error.message;
-    return;
-  }
-  document.getElementById('status').innerText = '✅ تم الرفع!';
-});
-</script>
-
 </body>
 </html>
