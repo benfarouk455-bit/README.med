@@ -685,20 +685,25 @@ const supabase = window.supabase.createClient(
 
 console.log("Supabase connected");
 </script>  
+<input type="file" id="fileInput" accept=".pdf" style="display:none" />
+<p id="status"></p>
 
-    <!-- ✅ أضف هذا هنا -->
-    <input type="file" id="fileInput" accept=".pdf" />
-    <button onclick="uploadPDF()">رفع الملخص</button>
-    <p id="status"></p>
+<script>
+document.getElementById('heroUpload').addEventListener('click', function() {
+  document.getElementById('fileInput').click();
+});
 
-    <script>
-    async function uploadPDF() {
-      const file = document.getElementById('fileInput').files[0];
-      if (!file) { document.getElementById('status').innerText = 'اختر ملف!'; return; }
-      const { data, error } = await supabase.storage.from('pdfs').upload(`${Date.now()}_${file.name}`, file);
-      if (error) { document.getElementById('status').innerText = 'خطأ: ' + error.message; return; }
-      document.getElementById('status').innerText = '✅ تم الرفع!';
-    }
+document.getElementById('fileInput').addEventListener('change', function() {
+  uploadPDF();
+});
+
+async function uploadPDF() {
+  const file = document.getElementById('fileInput').files[0];
+  if (!file) return;
+  const { data, error } = await supabase.storage.from('pdfs').upload(`${Date.now()}_${file.name}`, file);
+  if (error) { document.getElementById('status').innerText = 'خطأ: ' + error.message; return; }
+  document.getElementById('status').innerText = '✅ تم الرفع!';
+}
 </script>
 </body>
 </html>
