@@ -673,66 +673,32 @@ init();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-const supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
-const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k;
-
-const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);
-
-console.log("Supabase connected");
-</script>  
 <input type="file" id="fileInput" accept=".pdf" style="display:none" />
 <p id="status"></p>
 
 <script>
-window.addEventListener('load', function() {
+const supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k";
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-  let isLogin = true;
-
-  document.getElementById('authSwitch').addEventListener('click', function() {
-    isLogin = !isLogin;
-    document.getElementById('authTitle').innerText = isLogin ? 'أهلاً بعودتك' : 'إنشاء حساب جديد';
-    document.getElementById('authSwitchText').innerText = isLogin ? 'ليس لديك حساب؟' : 'لديك حساب؟';
-    this.innerText = isLogin ? 'سجل الدخول' : 'أنشئ حساباً';
-  });
-
-  document.getElementById('authForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = document.getElementById('authEmail').value;
-    const password = document.getElementById('authPassword').value;
-    if (isLogin) {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) { alert('خطأ: ' + error.message); return; }
-      alert('✅ تم تسجيل الدخول!');
-    } else {
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) { alert('خطأ: ' + error.message); return; }
-      alert('✅ تم إنشاء الحساب!');
-    }
-    document.getElementById('authModal').classList.add('hidden');
-  });
-
-  document.getElementById('heroUpload').addEventListener('click', function() {
-    document.getElementById('fileInput').click();
-  });
-
-  document.getElementById('fileInput').addEventListener('change', function() {
-    uploadPDF();
-  });
-
+document.getElementById('heroUpload').addEventListener('click', function() {
+  document.getElementById('fileInput').click();
 });
 
-async function uploadPDF() {
-  const file = document.getElementById('fileInput').files[0];
+document.getElementById('fileInput').addEventListener('change', async function() {
+  const file = this.files[0];
   if (!file) return;
-  const { data, error } = await supabase.storage.from('pdfs').upload(`${Date.now()}_${file.name}`, file);
-  if (error) { document.getElementById('status').innerText = 'خطأ: ' + error.message; return; }
+  document.getElementById('status').innerText = 'جاري الرفع...';
+  const { data, error } = await supabase.storage
+    .from('pdfs')
+    .upload(`${Date.now()}_${file.name}`, file);
+  if (error) {
+    document.getElementById('status').innerText = 'خطأ: ' + error.message;
+    return;
+  }
   document.getElementById('status').innerText = '✅ تم الرفع!';
-}
+});
 </script>
+
 </body>
 </html>
