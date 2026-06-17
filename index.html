@@ -685,13 +685,6 @@ const supabase = window.supabase.createClient(
 
 console.log("Supabase connected");
 </script>  
-<!-- كود Supabase الموجود عندك -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-      const supabaseUrl = "...";
-      const supabaseKey = "...";
-      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-    </script>
 
     <!-- ✅ أضف هذا هنا -->
     <input type="file" id="fileInput" accept=".pdf" />
@@ -706,9 +699,6 @@ console.log("Supabase connected");
       if (error) { document.getElementById('status').innerText = 'خطأ: ' + error.message; return; }
       document.getElementById('status').innerText = '✅ تم الرفع!';
     }
-    </script>
-
+</script>
 </body>
-</html>
-  <body>
 </html>
