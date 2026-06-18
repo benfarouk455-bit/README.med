@@ -364,6 +364,12 @@ button, a {
           <label class="text-sm font-bold mb-1 block">رفع الملف (PDF)</label>
           <div class="relative border-2 border-dashed border-emerald-300 dark:border-emerald-800 rounded-2xl p-6 text-center bg-emerald-50/50 dark:bg-emerald-950/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition cursor-pointer">
             <input id="upFile" type="file" accept=".pdf" class="absolute inset-0 opacity-0 cursor-pointer" />
+           <div>
+  <label class="text-sm font-bold mb-1 block">رفع الصور (اختياري)</label>
+
+  <input id="upImages" type="file" accept="image/*" multiple
+    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" />
+</div>
             <i class="ri-upload-cloud-2-line text-4xl text-emerald-600 mb-2 block"></i>
             <p class="font-bold">اسحب الملف هنا أو انقر للاختيار</p>
             <p id="fileName" class="text-xs text-slate-500 mt-1">PDF حتى 20MB</p>
@@ -625,10 +631,27 @@ function bindEvents() {
     const module = $('#upModule').value.trim();
     const desc = $('#upDesc').value.trim();
     const file = $('#upFile').files[0];
+    let fileUrl = null;
 const images = $('#upImages').files;
 let imageUrls = [];
+  for (let i = 0; i < images.length; i++) {
+  const img = images[i];
+  const fileName = ${Date.now()}_${img.name};
+
+  const { error } = await sb.storage
+    .from('images')
+    .upload(fileName, img);
+
+  if (!error) {
+    const { data } = sb.storage
+      .from('images')
+      .getPublicUrl(fileName);
+
+    imageUrls.push(data.publicUrl);
+  }
+}
     if (!title || !year || !module) return showToast('أكمل الحقول المطلوبة', 'ri-error-warning-fill');
-    if (!file) return showToast('اختر ملف PDF', 'ri-error-warning-fill');
+    // if (!file) return showToast('اختر ملف PDF', 'ri-error-warning-fill');
 
     $('#uploadStatus').textContent = 'جاري رفع الملف...';
     $('#uploadStatus').classList.remove('hidden');
