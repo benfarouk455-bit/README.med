@@ -625,13 +625,29 @@ function bindEvents() {
     const module = $('#upModule').value.trim();
     const desc = $('#upDesc').value.trim();
     const file = $('#upFile').files[0];
-
+const images = $('#upImages').files;
+let imageUrls = [];
     if (!title || !year || !module) return showToast('أكمل الحقول المطلوبة', 'ri-error-warning-fill');
     if (!file) return showToast('اختر ملف PDF', 'ri-error-warning-fill');
 
     $('#uploadStatus').textContent = 'جاري رفع الملف...';
     $('#uploadStatus').classList.remove('hidden');
+for (let i = 0; i < images.length; i++) {
+  const img = images[i];
+  const fileName = ${Date.now()}_${img.name};
 
+  const { error } = await sb.storage
+    .from('images')
+    .upload(fileName, img);
+
+  if (!error) {
+    const { data } = sb.storage
+      .from('images')
+      .getPublicUrl(fileName);
+
+    imageUrls.push(data.publicUrl);
+  }
+}
     // Upload file to Supabase Storage
     const fileName = `${Date.now()}_${file.name}`;
     const { data: fileData, error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
@@ -646,6 +662,7 @@ function bindEvents() {
 
     // Save to database
     const { error: dbError } = await sb.from('summaries').insert([{
+     images: imageUrls,
       title,
       year,
       module,
