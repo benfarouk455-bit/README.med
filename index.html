@@ -679,7 +679,7 @@ for (let i = 0; i < images.length; i++) {
     return;
 }
 const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
-let fileUrl = urlData.publicUrl;
+ fileUrl = urlData.publicUrl;
 
     // Save to database
     const { error: dbError } = await sb.from('summaries').insert([{
