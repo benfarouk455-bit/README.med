@@ -593,7 +593,7 @@ function bindEvents() {
     $('#uploadStatus').classList.remove('hidden');
 
     // Upload file to Supabase Storage
-    const fileName = ${Date.now()}_${file.name};
+    const fileName = `${Date.now()}_${file.name}`;
     const { data: fileData, error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
     if (fileError) {
       $('#uploadStatus').textContent = 'خطأ في رفع الملف: ' + fileError.message;
