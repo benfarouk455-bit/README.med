@@ -633,7 +633,8 @@ function bindEvents() {
     let fileUrl = null;
 const images = $('#upImages').files;
 let imageUrls = [];
-  for (let i = 0; i < images.length; i++) {
+if (images && images.length > 0){
+    for (let i = 0; i < images.length; i++) {
   const img = images[i];
   const fileName = $`{Date.now()}_${img.name}`;
 
