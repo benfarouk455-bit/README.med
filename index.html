@@ -681,6 +681,7 @@ for (let i = 0; i < images.length; i++) {
 
     // Get public URL
     const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
+   const file = $('#upFile').files[0];
     let fileUrl = null; 
     fileUrl = urlData.publicuUrl;
 
