@@ -675,15 +675,16 @@ for (let i = 0; i < images.length; i++) {
     const fileName = `${Date.now()}_${file.name}`;
     const { data: fileData, error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
     if (fileError) {
-      $('#uploadStatus').textContent = 'خطأ في رفع الملف: ' + fileError.message;
-      return;
+      const { data: urlData } = sb.storage
+      .from( 'pdf' ) 
+      .getPublicUrl(fileName);
+      fileUrl = urlData.publicUrl;
+    
     }
 
     // Get public URL
-    const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
-   const file = $('#upFile').files[0];
-    let fileUrl = null; 
-    fileUrl = urlData.publicuUrl;
+  const file = $('#upFile').files[0];
+  let fileUrl = null; 
 
     // Save to database
     const { error: dbError } = await sb.from('summaries').insert([{
