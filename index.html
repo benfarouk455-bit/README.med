@@ -460,7 +460,7 @@ function renderSummaries() {
       </div>
       <div class="flex items-center justify-between">
         <span class="flex items-center gap-1 text-xs font-bold text-slate-500"><i class="ri-download-2-line"></i> ${s.downloads||0}</span>
-        ${s.file_url ? <a href="${s.file_url}" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</a> : '<span class="text-xs text-slate-400">لا يوجد PDF</span>'}
+        ${s.file_url ? <a href="${s.file_url}" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</a> : `<span class="text-xs text-slate-400">لا يوجد PDF</span>`}
       </div>
       ${s.images && s.images.length > 0 ? <div class="mt-3 flex gap-2 overflow-x-auto">${s.images.map(img => `<img src="${img}" class="h-16 rounded-lg object-cover" />).join('')}</div>` : ''}
     </div>
