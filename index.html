@@ -579,7 +579,7 @@ function bindEvents() {
     // رفع PDF
     let fileUrl = null;
     if (file) {
-      const fileName = ${Date.now()}_${file.name};
+      const fileName = `${Date.now()}_${file.name}`;
       const { error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
       if (fileError) {
         $('#uploadStatus').textContent = 'خطأ في رفع الملف: ' + fileError.message;
