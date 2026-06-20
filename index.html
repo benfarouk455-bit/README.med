@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
 <title>الجوهرة في الطب | ملخصات طلبة الطب - جامعة الجزائر 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,62 +25,26 @@ tailwind.config = {
 }
 </script>
 <style>
-* { font-family: 'Cairo', sans-serif; }
-html { scroll-behavior: smooth; }
-body { -webkit-font-smoothing: antialiased; }
+* { font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; cursor: pointer; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
 .scrollbar-thin::-webkit-scrollbar-thumb { background: #10b981; border-radius: 999px; }
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 @keyframes fadeInUp { from { opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
 .animate-fadeInUp { animation: fadeInUp .6s ease forwards; }
-button,
-a,
-input,
-select,
-textarea {
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-button,
-a {
-  position: relative;
-  z-index: 5;
-  pointer-events: auto;
-}
-
-.fixed {
-  -webkit-overflow-scrolling: touch;
-}
-
-body {
-  overflow-x: hidden;
-}
- html, body {
-  touch-action: manipulation;
-} 
-html, body {
-  touch-action: manipulation;
-  overflow-x: hidden;
-}
-
-button, a {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
 </style>
 </head>
 <body class="bg-[#f8fafc] dark:bg-[#020617] text-slate-800 dark:text-slate-100 font-cairo transition-colors duration-300">
 
-<!-- Background Gradient Blobs -->
-<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-non">
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
   <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-300/30 dark:bg-emerald-600/20 rounded-full blur-3xl"></div>
   <div class="absolute top-1/2 -left-40 w-96 h-96 bg-cyan-300/30 dark:bg-cyan-600/20 rounded-full blur-3xl"></div>
   <div class="absolute bottom-0 right-1/3 w-80 h-80 bg-teal-300/20 dark:bg-teal-600/20 rounded-full blur-3xl"></div>
 </div>
 
-<!-- Navbar -->
 <header class="sticky top-0 z-40 glass bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/60 dark:border-slate-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
@@ -93,13 +57,11 @@ button, a {
           <p class="text-xs text-slate-500 dark:text-slate-400 -mt-0.5">جامعة الجزائر 1</p>
         </div>
       </div>
-
       <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
         <a href="#summaries" class="hover:text-emerald-600 transition">الملخصات</a>
         <a href="#years" class="hover:text-emerald-600 transition">السنوات</a>
         <a href="#about" class="hover:text-emerald-600 transition">عن المنصة</a>
       </nav>
-
       <div class="flex items-center gap-2">
         <button id="darkToggle" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center justify-center">
           <i class="ri-moon-line dark:hidden text-lg"></i>
@@ -111,8 +73,7 @@ button, a {
         </div>
         <div id="userMenu" class="hidden items-center gap-3">
           <button id="uploadBtn" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold bg-emerald-600 text-white hover:bg-emerald-700 shadow-soft transition">
-            <i class="ri-upload-2-line"></i>
-            <span>تبرع بملخص</span>
+            <i class="ri-upload-2-line"></i><span>تبرع بملخص</span>
           </button>
           <div class="relative">
             <button id="avatarBtn" class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 text-white font-bold flex items-center justify-center"></button>
@@ -140,7 +101,6 @@ button, a {
   </div>
 </header>
 
-<!-- Hero -->
 <section class="relative pt-16 pb-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -161,8 +121,7 @@ button, a {
             ارفع ملخصك الآن
           </button>
           <a href="#summaries" class="px-6 py-3 rounded-2xl font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 transition flex items-center gap-2">
-            <i class="ri-search-line"></i>
-            تصفح الملخصات
+            <i class="ri-search-line"></i>تصفح الملخصات
           </a>
         </div>
         <div class="mt-10 grid grid-cols-3 gap-4 max-w-md">
@@ -195,7 +154,6 @@ button, a {
   </div>
 </section>
 
-<!-- Years Filter -->
 <section id="years" class="py-8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between mb-4">
@@ -206,7 +164,6 @@ button, a {
   </div>
 </section>
 
-<!-- Search & Summaries -->
 <section id="summaries" class="py-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
@@ -232,7 +189,6 @@ button, a {
   </div>
 </section>
 
-<!-- About -->
 <section id="about" class="py-20 border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -256,7 +212,6 @@ button, a {
   </div>
 </section>
 
-<!-- Footer -->
 <footer class="py-10 border-t border-slate-200 dark:border-slate-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -345,12 +300,7 @@ button, a {
             <option value="5">السنة الخامسة</option>
             <option value="6">السنة السادسة</option>
             <option value="7">السنة السابعة</option>
-         </select>
-       <div class="md:col-span-2">
-  <label class="text-sm font-bold mb-1 block">رفع الصور</label>
-  <input id="upImages" type="file" accept="image/*" multiple
-    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" />
-</div>
+          </select>
         </div>
         <div>
           <label class="text-sm font-bold mb-1 block">الموديول / المادة</label>
@@ -361,14 +311,13 @@ button, a {
           <textarea id="upDesc" rows="3" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-4 focus:ring-emerald-500/20" placeholder="اشرح محتوى الملخص وما يميزه..."></textarea>
         </div>
         <div class="md:col-span-2">
-          <label class="text-sm font-bold mb-1 block">رفع الملف (PDF)</label>
+          <label class="text-sm font-bold mb-1 block">رفع الصور (اختياري)</label>
+          <input id="upImages" type="file" accept="image/*" multiple class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="text-sm font-bold mb-1 block">رفع الملف PDF (اختياري)</label>
           <div class="relative border-2 border-dashed border-emerald-300 dark:border-emerald-800 rounded-2xl p-6 text-center bg-emerald-50/50 dark:bg-emerald-950/30 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition cursor-pointer">
             <input id="upFile" type="file" accept=".pdf" class="absolute inset-0 opacity-0 cursor-pointer" />
-           <div>
-  <label class="text-sm font-bold mb-1 block">رفع الصور (اختياري)</label>
-
-    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" />
-</div>
             <i class="ri-upload-cloud-2-line text-4xl text-emerald-600 mb-2 block"></i>
             <p class="font-bold">اسحب الملف هنا أو انقر للاختيار</p>
             <p id="fileName" class="text-xs text-slate-500 mt-1">PDF حتى 20MB</p>
@@ -395,12 +344,10 @@ button, a {
 </div>
 
 <script>
-// ========== Supabase ==========
 const _supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
 const _supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k";
 const sb = window.supabase.createClient(_supabaseUrl, _supabaseKey);
 
-// ========== Helpers ==========
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
@@ -425,7 +372,6 @@ function timeAgo(ts) {
   return Math.floor(d/86400)+'ي';
 }
 
-// ========== Auth UI ==========
 function updateAuthUI() {
   const logged = !!currentUser;
   $('#authButtons').classList.toggle('hidden', logged);
@@ -450,7 +396,6 @@ function setAuthMode(mode) {
   $('#authSwitch').textContent = mode==='login' ? 'إنشاء حساب' : 'سجل الدخول';
 }
 
-// ========== Summaries ==========
 async function loadSummaries() {
   const { data, error } = await sb.from('summaries').select('*').order('created_at', { ascending: false });
   if (!error && data) {
@@ -514,13 +459,10 @@ function renderSummaries() {
         <span>${timeAgo(s.created_at)}</span>
       </div>
       <div class="flex items-center justify-between">
-        <div class="flex items-center gap-4 text-xs font-bold text-slate-500">
-          <span class="flex items-center gap-1"><i class="ri-download-2-line"></i> ${s.downloads||0}</span>
-        </div>
-${s.file_url
- ? `<a href="${s.file_url}" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</a>`
- : `<span class="text-xs text-slate-400">لا يوجد ملف</span>`
-}
+        <span class="flex items-center gap-1 text-xs font-bold text-slate-500"><i class="ri-download-2-line"></i> ${s.downloads||0}</span>
+        ${s.file_url ? <a href="${s.file_url}" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black hover:scale-105 transition">تحميل PDF</a> : '<span class="text-xs text-slate-400">لا يوجد PDF</span>'}
+      </div>
+      ${s.images && s.images.length > 0 ? <div class="mt-3 flex gap-2 overflow-x-auto">${s.images.map(img => `<img src="${img}" class="h-16 rounded-lg object-cover" />).join('')}</div>` : ''}
     </div>
   `).join('');
 }
@@ -543,9 +485,7 @@ function updateStats() {
   $('#statDownloads').textContent = summaries.reduce((a,b)=>a+(b.downloads||0),0);
 }
 
-// ========== Events ==========
 function bindEvents() {
-  // Dark mode
   const dark = localStorage.getItem('jawhara_dark') === '1';
   document.documentElement.classList.toggle('dark', dark);
   $('#darkToggle').onclick = () => {
@@ -553,25 +493,19 @@ function bindEvents() {
     localStorage.setItem('jawhara_dark', document.documentElement.classList.contains('dark') ? '1' : '0');
   };
 
-  // Auth modal
   $('#loginBtn').onclick = () => { setAuthMode('login'); openModal('#authModal'); };
   $('#registerBtn').onclick = () => { setAuthMode('register'); openModal('#authModal'); };
   $('#closeAuth').onclick = () => closeModal('#authModal');
   $('#authSwitch').onclick = () => setAuthMode(authMode==='login'?'register':'login');
 
-  // Auth form submit
   $('#authForm').onsubmit = async (e) => {
     e.preventDefault();
     const email = $('#authEmail').value.trim();
     const password = $('#authPassword').value;
-
     if (authMode === 'register') {
       const name = $('#authName').value.trim();
       const year = $('#authYear').value;
-      const { data, error } = await sb.auth.signUp({
-        email, password,
-        options: { data: { name, year } }
-      });
+      const { data, error } = await sb.auth.signUp({ email, password, options: { data: { name, year } } });
       if (error) return showToast('خطأ: ' + error.message, 'ri-error-warning-fill');
       currentUser = data.user;
       showToast('تم إنشاء الحساب! تحقق من إيميلك ✅');
@@ -583,10 +517,8 @@ function bindEvents() {
     }
     closeModal('#authModal');
     updateAuthUI();
-    $('#statUsers').textContent = '—';
   };
 
-  // User menu
   $('#avatarBtn').onclick = () => $('#dropdown').classList.toggle('hidden');
   document.addEventListener('click', e => {
     if (!e.target.closest('#avatarBtn') && !e.target.closest('#dropdown'))
@@ -599,14 +531,8 @@ function bindEvents() {
     showToast('تم تسجيل الخروج');
   };
 
-  // Open upload modal
   const openUpload = () => {
-    if (!currentUser) {
-      setAuthMode('login');
-      openModal('#authModal');
-      showToast('سجل دخولك أولاً', 'ri-lock-line');
-      return;
-    }
+    if (!currentUser) { setAuthMode('login'); openModal('#authModal'); showToast('سجل دخولك أولاً', 'ri-lock-line'); return; }
     openModal('#uploadModal');
   };
   $('#uploadBtn').onclick = openUpload;
@@ -616,13 +542,11 @@ function bindEvents() {
   $('#closeUpload').onclick = () => closeModal('#uploadModal');
   $('#cancelUpload').onclick = () => closeModal('#uploadModal');
 
-  // File name display
   $('#upFile').onchange = e => {
     const f = e.target.files[0];
     $('#fileName').textContent = f ? f.name : 'PDF حتى 20MB';
   };
 
-  // Upload form submit
   $('#uploadForm').onsubmit = async (e) => {
     e.preventDefault();
     const title = $('#upTitle').value.trim();
@@ -630,65 +554,47 @@ function bindEvents() {
     const module = $('#upModule').value.trim();
     const desc = $('#upDesc').value.trim();
     const file = $('#upFile').files[0];
-    let fileUrl = null;
-const images = $('#upImages').files;
-let imageUrls = [];
-if (images && images.length > 0){
-    for (let i = 0; i < images.length; i++) {
-  const img = images[i];
-  const fileName = $`{Date.now()}_${img.name}`;
+    const images = $('#upImages').files;
 
-  const { error } = await sb.storage
-    .from('images')
-    .upload(fileName, img);
-
-  if (!error) {
-    const { data } = sb.storage
-      .from('images')
-      .getPublicUrl(fileName);
-
-    imageUrls.push(data.publicUrl);
-  }
-}
     if (!title || !year || !module) return showToast('أكمل الحقول المطلوبة', 'ri-error-warning-fill');
-    // if (!file) return showToast('اختر ملف PDF', 'ri-error-warning-fill');
+    if (!file && (!images || images.length === 0)) return showToast('أضف ملف PDF أو صورة على الأقل', 'ri-error-warning-fill');
 
-    $('#uploadStatus').textContent = 'جاري رفع الملف...';
+    $('#uploadStatus').textContent = 'جاري الرفع...';
     $('#uploadStatus').classList.remove('hidden');
-for (let i = 0; i < images.length; i++) {
-  const img = images[i];
-  const fileName = $`{Date.now()}_${img.name}`;
 
-  const { error } = await sb.storage
-    .from('images')
-    .upload(fileName, img);
+    // رفع الصور
+    let imageUrls = [];
+    if (images && images.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        const img = images[i];
+        const imgName = ${Date.now()}_${img.name};
+        const { error: imgError } = await sb.storage.from('images').upload(imgName, img);
+        if (!imgError) {
+          const { data: imgData } = sb.storage.from('images').getPublicUrl(imgName);
+          imageUrls.push(imgData.publicUrl);
+        }
+      }
+    }
 
-  if (!error) {
-    const { data } = sb.storage
-      .from('images')
-      .getPublicUrl(fileName);
+    // رفع PDF
+    let fileUrl = null;
+    if (file) {
+      const fileName = ${Date.now()}_${file.name};
+      const { error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
+      if (fileError) {
+        $('#uploadStatus').textContent = 'خطأ في رفع الملف: ' + fileError.message;
+        return;
+      }
+      const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
+      fileUrl = urlData.publicUrl;
+    }
 
-    imageUrls.push(data.publicUrl);
-  }
-}
-    // Upload file to Supabase Storage
-    const fileName = `${Date.now()}_${file.name}`;
-    const { data: fileData, error: fileError } = await sb.storage.from('pdfs').upload(fileName, file);
-    if (fileError) {
-    $('#uploadStatus').textContent = 'خطأ في رفع الملف: ' + fileError.message;
-    return;
-}
-const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
- fileUrl = urlData.publicUrl;
-
-    // Save to database
+    // حفظ في قاعدة البيانات
     const { error: dbError } = await sb.from('summaries').insert([{
-     images: imageUrls,
-      title,
-      year,
-      module,
+      title, year, module,
       description: desc || 'بدون وصف',
       file_url: fileUrl,
+      images: imageUrls,
       uploader: currentUser.user_metadata?.name || currentUser.email,
       uploader_id: currentUser.id,
       downloads: 0,
@@ -708,48 +614,21 @@ const { data: urlData } = sb.storage.from('pdfs').getPublicUrl(fileName);
     loadSummaries();
   };
 
-  // Search & sort
   $('#searchInput').oninput = renderSummaries;
   $('#sortSelect').onchange = renderSummaries;
-
-  // Mobile menu
   $('#mobileMenuBtn').onclick = () => $('#mobileMenu').classList.toggle('hidden');
 }
 
-// ========== Init ==========
 async function init() {
-  // Check existing session
   const { data: { session } } = await sb.auth.getSession();
   if (session) currentUser = session.user;
-
   renderYearTabs();
   updateAuthUI();
   bindEvents();
   await loadSummaries();
 }
 
-const supabaseUrl = "https://uhlhnxpscfmrvlolsivk.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobGhueHBzY2ZtcnZsb2xzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDE3MTUsImV4cCI6MjA5NzI3NzcxNX0._lJt8a-_Iq_RLZLUtREYDAUy8SlG_1_DX8xikSI9n-k";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-document.getElementById('heroUpload').addEventListener('click', function() {
-  document.getElementById('fileInput').click();
-});
-
-document.getElementById('fileInput').addEventListener('change', async function() {
-  const file = this.files[0];
-  if (!file) return;
-  document.getElementById('status').innerText = 'جاري الرفع...';
-  const { data, error } = await supabase.storage
-    .from('pdfs')
-    .upload(`${Date.now()}_${file.name}`, file);
-  if (error) {
-    document.getElementById('status').innerText = 'خطأ: ' + error.message;
-    return;
-  }
-  document.getElementById('status').innerText = '✅ تم الرفع!';
-});
+init();
 </script>
-
 </body>
 </html>
